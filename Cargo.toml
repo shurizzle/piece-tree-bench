@@ -1,0 +1,25 @@
+[package]
+name = "piece-tree-bench"
+version = "0.1.0"
+edition = "2024"
+publish = false
+license = "GPL-3.0-or-later"
+description = "Cross-library benchmark harness for piece-tree: ropey 1.x, ropey 2 beta, Zed rope (sum_tree)"
+
+[dependencies]
+piece-tree = { git = "https://github.com/shurizzle/piece-tree" }
+ropey = "1.6"
+ropey2 = { package = "ropey", version = "=2.0.0-beta.1" }
+rope = { path = "vendor/rope" }
+sum_tree = { path = "vendor/sum_tree" }
+mimalloc = { version = "0.1", optional = true }
+memchr = "2"
+
+[features]
+mimalloc = ["dep:mimalloc"]
+
+[workspace]
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
